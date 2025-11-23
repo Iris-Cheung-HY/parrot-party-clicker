@@ -8,6 +8,49 @@
 //    (Ex: make parrot bigger, smaller, change the text/emoji,
 //    etc.)
 
+const state = {
+    parrotCount: 0,
+    countDisplay: null,
+    parrotButton: null,
+    parrotContainer: null,
+    resetButton: null,
+};
+
+const addParrotButtonClicked = () => {
+    const newParrot = document.createElement('img');
+    newParrot.src = 'https://cultofthepartyparrot.com/parrots/hd/parrot.gif';
+    state.parrotCount += 1;
+    state.countDisplay.textContent = `Clicks: ${state.parrotCount}`;
+    state.parrotContainer.appendChild(newParrot);
+};
+
+const resetButtonClicked = () => {
+    state.parrotCount = 0;
+    state.parrotContainer.innerHTML = '';
+    state.countDisplay.textContent = `Clicks: ${state.parrotCount}`;
+}
+
+const loadControls = () => {
+    state.parrotButton = document.getElementById('parrotButton');
+    state.countDisplay = document.getElementById('clickcounts');
+    state.parrotContainer = document.getElementById('parrotContainer');
+    state.resetButton = document.getElementById('resetButton');
+};
+
+const registerEvents = () => {
+    state.parrotButton.addEventListener('click', addParrotButtonClicked);
+    state.resetButton.addEventListener('click', resetButtonClicked);
+};
+
+const onLoaded = () => {
+    loadControls();
+    addParrotButtonClicked();
+    resetButtonClicked();
+    registerEvents();
+};
+
+onLoaded();
+
 // Extra:
 // // Box 1: When the mouse hovers over Box 1, switch the background to pink
 // Box 2: When the spacebar is pressed down, make the text in Box 2 turn into a flan emoji
